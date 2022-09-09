@@ -1,0 +1,4 @@
+*.exe
+dpkg/
+etc/
+test_java.txt
