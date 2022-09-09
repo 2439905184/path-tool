@@ -32,7 +32,7 @@ proc config_path(name:string) =
   echo "你选择了: " & select
   var windows_path = myToWindowsPath(select)
   var exit = execCmd("setx hello " & windows_path)
-  echo "新的环境变量已创建！"
+  echo "新的环境变量已创建！ 请手动配置path环境变量，在里面加入" & "%" & name & "%"
   echo "退出码：" & $exit
 
 if params[0] == "mode":
