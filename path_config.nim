@@ -4,6 +4,7 @@ import std/json
 import std/strutils
 import std/private/win_setenv
 import std/osproc
+import Utils
 
 var params = commandLineParams()
 
@@ -29,7 +30,8 @@ proc config_path(name:string) =
   var select:string = selections[select_index]
   echo select_index
   echo "你选择了: " & select
-  var exit = execCmd("setx hello " & select)
+  var windows_path = myToWindowsPath(select)
+  var exit = execCmd("setx hello " & windows_path)
   echo "新的环境变量已创建！"
   echo "退出码：" & $exit
 
