@@ -1,7 +1,6 @@
 # 此文件是模仿linux下的update-alternatives命令，但是无法用于配置java，适用于无第三方依赖dll的静态链接exe
 import os
 import system/io
-import std/typeinfo
 import std/strutils
 const symlinkPath = "/etc/alternatives"
 const configPath = "dpkg/alternatives/"

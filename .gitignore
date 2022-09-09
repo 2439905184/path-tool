@@ -1,5 +1,6 @@
 *.exe
-dpkg/
+dpkg/alternatives
 etc/
 test_java.txt
 input.nim
+!dpkg/path
