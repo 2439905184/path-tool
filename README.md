@@ -6,3 +6,5 @@
 2. main.exe install "命令名称" "绝对路径"
 3. main.exe config "命令名称" //此时它会问你要切换到哪个版本，输入序号就可以了
 4. 在系统的其他文件夹打开cmd命令行，然后输入xxx.exe 或者xxx 快速调用etc/alternatives目录下的软链接的exe程序
+## 切换命令功能
+![path-tool1](doc/path-tool.gif)
