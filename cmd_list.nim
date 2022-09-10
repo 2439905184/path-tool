@@ -6,7 +6,7 @@ proc list_command*(p_options:seq[string],mode:string) =
     return
   var name = p_options[0]
   if mode == "alternatives":
-    for value in lines(fmt"dpkg/alternatives/{name}"):
+    for value in lines(fmt"dpkg/alternatives/{name}.txt"):
       echo value
   if mode == "path":
     var myJsonNode = parseJson(fmt"dpkg/path/{name}.json")
