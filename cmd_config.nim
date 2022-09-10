@@ -42,13 +42,13 @@ proc config_symlink*(p_options:seq[string]) =
     echo "错误，参数过多！"
   var name = p_options[0]
   var full_name = name & ".exe"
-  var configPath = fmt"dpkg/alternatives/{name}"
+  var configPath = fmt"dpkg/alternatives/{name}.txt"
   var symlinkPath = "/etc/alternatives"
   echo "--- you are change a command ---"
   echo "Selection  Path"
   var selections:seq[string] = @[]
   var index = 0
-  for line in lines(configPath & name):
+  for line in lines(configPath):
     selections.add(line)
     var show = $index & "  " & name & "  " & line
     echo show
