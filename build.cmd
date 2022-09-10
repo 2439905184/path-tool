@@ -1,0 +1,1 @@
+nim c -d:release path_tool.nim 
