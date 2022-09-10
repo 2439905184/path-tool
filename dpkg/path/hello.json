@@ -1,5 +1,1 @@
-{
-    "selfVar" : "hello",
-    "current-select" : "D:/Desktop/path-tool/test/hello.exe",
-    "path" : ["D:/Desktop/path-tool/test","D:/Desktop/path-tool/test/hello2"]
-}
+{"selfVar":"hello","path":["D:/Desktop/path-tool/test/hello2"]}
