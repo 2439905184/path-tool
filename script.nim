@@ -1,0 +1,9 @@
+include cmd_init
+include cmd_mode
+include cmd_install
+include cmd_config
+include cmd_remove
+include cmd_remove_all
+include cmd_list
+include cmd_version
+include cmd_help 
