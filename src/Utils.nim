@@ -1,3 +1,4 @@
+import os
 import std/strutils
 import std/sequtils
 
@@ -8,7 +9,7 @@ proc myToLinuxPath*(path: string): string =
   return path.replace("\\","/")
 
 proc getWorkMode*(): string = 
-  return readFile("etc/mode.txt")
+  return readFile(absolutePath("etc/mode.txt",getEnv("PathTool")))
 
 # 此函数用于向txt添加新的行，仅当新的行的字符串和旧行字符串不重复时追加，覆盖旧文件
 proc add_new_line_when_old_file_do_not_include_new_value*(p_file:string, p_newline:string) = 

@@ -8,7 +8,7 @@ var command_type:string
 var args:seq[string]
 var currentWorkMode:string = "alternatives"
 
-if fileExists("etc/mode.txt"):
+if fileExists(absolutePath("etc/mode.txt",root=getEnv("PathTool"))):
   currentWorkMode = getWorkMode()
 # 前向声明
 proc main(): void
@@ -22,7 +22,6 @@ when declared(commandLineParams):
     command_type = full_params[0]
     args = full_params[1..len(full_params)-1]
     main()
-    discard
 else:
   #help_command()
   echo "无参数传入"

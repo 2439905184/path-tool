@@ -49,23 +49,27 @@ proc install_path*(p_options:seq[string]) =
   var windows_path:string = p_options[1]
 
   var unix_path = myToLinuxPath(windows_path)
-  var jsonFile = fmt"dpkg/path/{name}.json"
-  var old_paths:JsonNode 
-  var path_json:JsonNode = newJString(unix_path)
+  var jsonFile = absolutePath(fmt"dpkg/path/{name}.json",root=getEnv("PathTool"))
+  var newValue:JsonNode = newJString(unix_path)
 
   if fileExists(jsonFile):
+    echo "文件已存在，添加数据"
     var myJsonNode = parseFile(jsonFile)
-    old_paths = myJsonNode["path"]
-    var oldPath:seq[JsonNode] = old_paths.getElems()
+    var myJsonPath:JsonNode = myJsonNode["path"]
+    var myJsonPathSeq:seq[JsonNode] = myJsonPath.getElems()
 
-    for value in oldPath:
-      if not(path_json in old_paths):
-        old_paths.add(path_json)
-    writeFile(fmt"dpkg/path/{name}.json",$myJsonNode)
+    for v in myJsonPathSeq:
+      if not(newValue in myJsonPath):
+        myJsonPath.add(newValue)
+    #echo $myJsonNode
+    writeFile(jsonFile,$myJsonNode)
   else:
+    echo "文件不存在，创建json"
     var myJson = %*{"env":"","current":"","path":[]}
     myJson["env"] = newJString(name)
-    myJson["path"].add(newJString(unix_path))
-    writeFile(fmt"dpkg/path/{name}.json",$myJson)
+    myJson["path"] = % @[unix_path]
+    var truePath = absolutePath(fmt"dpkg/path/{name}",getEnv("PathTool"))
+    #echo myJson
+    writeFile(fmt"{truePath}.json",$myJson)
     discard execCmd(fmt"setx {name} {windows_path}")
     echo fmt"环境变量: {name} 已添加，请手动在用户环境变量的path加入%{name}%"

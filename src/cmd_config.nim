@@ -11,7 +11,7 @@ proc config_path*(p_options:seq[string]) =
     echo "错误，参数过多！"
     return
   var name = p_options[0]
-  var myJsonFile = fmt"dpkg/path/{name}.json"
+  var myJsonFile = absolutePath(fmt"dpkg/path/{name}.json",root=getEnv("PathTool"))
   var myJsonNode:JsonNode = parseFile(myJsonFile)
   var all_path:JsonNode = myJsonNode["path"]
   var current_select = myJsonNode["current"]
@@ -34,7 +34,8 @@ proc config_path*(p_options:seq[string]) =
   var windows_path = myToWindowsPath(select)
   # 小问题，json文件的current key的值未修改 不过不影响环境变量的切换
   current_select = newJString(select)
-  writeFile(fmt"dpkg/path/{name}.json",$myJsonNode)
+  var truePath = absolutePath(fmt"dpkg/path/{name}",root=getEnv("PathTool"))
+  writeFile(fmt"{truePath}.json",$myJsonNode)
   discard execCmd(fmt"setx {name} {windows_path}")
   
   echo fmt"此命令的绝对路径已更改!"

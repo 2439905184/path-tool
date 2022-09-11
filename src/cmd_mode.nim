@@ -1,3 +1,5 @@
+import os
+
 proc mode_command*(p_options:seq[string]) = 
   if len(p_options) > 1:
     echo "错误，参数过多！"
@@ -7,4 +9,7 @@ proc mode_command*(p_options:seq[string]) =
     echo "仅支持 path 或 alternatives参数"
     return
   var mode = p_options[0]
-  writeFile("etc/mode.txt",mode)
+  
+  var truePath = absolutePath("etc/mode.txt",root=getEnv("PathTool"))
+  #echo truePath
+  writeFile(truePath,mode)

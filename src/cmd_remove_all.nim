@@ -11,5 +11,5 @@ proc remove_all*(p_options:seq[string],workMode:string) =
     removeFile(fmt"dpkg/alternatives/{name}.txt")
   
   if workMode == "path":
-    removeFile(fmt"dpkg/path/{name}.json")
+    removeFile(absolutePath(fmt"dpkg/path/{name}.json",getEnv("PathTool")))
     delEnv(name)
