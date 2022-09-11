@@ -52,3 +52,6 @@ path_tool config java
 6. 如果要安装其他开发工具的多版本工作，请重复以上的操作
 ## 效果展示
 ![example](doc/path-tool.gif)
+
+# 注意事项
+路径里面不能有特殊符号和空格
