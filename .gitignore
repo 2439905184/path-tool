@@ -1,11 +1,7 @@
 *.exe
 !test/hello/hello.exe
 !test/hello2/hello.exe
-dpkg/alternatives
-dpkg/path
+dpkg/
 etc/
-test_java.txt
-input.nim
-!test/hello2/hello.exe
 test.nim
 test.txt
