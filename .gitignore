@@ -1,9 +1,9 @@
 *.exe
 dpkg/alternatives
+dpkg/path
 etc/
 test_java.txt
 input.nim
-!dpkg/path
 !test/hello2/hello.exe
 test.nim
 test.txt
