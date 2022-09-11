@@ -60,7 +60,6 @@ proc install_path*(p_options:seq[string]) =
 
     for value in oldPath:
       if not(path_json in old_paths):
-        
         old_paths.add(path_json)
     writeFile(fmt"dpkg/path/{name}.json",$myJsonNode)
   else:

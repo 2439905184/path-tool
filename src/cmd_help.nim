@@ -25,5 +25,5 @@ proc help_command*() =
   echo ""
 
   echo "注意事项："
-  echo r"使用软链接工作原理时，请使用形如path-tool install hello.exe D:\hello\hello.exe 的方式添加命令"
+  echo r"使用软链接工作原理时，请使用形如path-tool install hello D:\hello\hello.exe 的方式添加命令"
   echo r"使用path工作原理是，请使用形如path-tool install hello D:\hello 的方式添加目录到环境变量"
