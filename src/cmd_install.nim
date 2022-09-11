@@ -47,10 +47,8 @@ proc install_path*(p_options:seq[string]) =
     return
   var name:string = p_options[0]
   var windows_path:string = p_options[1]
-  
 
   var unix_path = myToLinuxPath(windows_path)
-  #var windows_path = myToWindowsPath(unix_path)
   var jsonFile = fmt"dpkg/path/{name}.json"
   var old_paths:JsonNode 
   var path_json:JsonNode = newJString(unix_path)
@@ -65,18 +63,10 @@ proc install_path*(p_options:seq[string]) =
         
         old_paths.add(path_json)
     writeFile(fmt"dpkg/path/{name}.json",$myJsonNode)
-    #discard execCmd(fmt"setx {name} {windows_path}")
-  #var new_paths:seq[string] = @[]
-  #[for value in old_paths:
-    new_paths.add(value.getStr())
-  for vv in 0..len(old_paths):
-    if not(path in old_paths):
-      new_paths.add(path)
-      ]#
-#[
-  var myJson = %* {"selfVar":fmt"{name}","path":[fmt"{unix_path}{name}"]}
-  
-  var myJson = %* {"selfVar":fmt"{name}","path":new_paths}
-  writeFile(fmt"dpkg/path/{name}.json",$myJson)
-  discard execCmd(fmt"setx {name} {windows_path}")
-  echo fmt"环境变量: {name} 已添加，请手动在path加入%{name}%" ]#
+  else:
+    var myJson = %*{"env":"","path":[]}
+    myJson["env"] = newJString(name)
+    myJson["path"].add(newJString(unix_path))
+    writeFile(fmt"dpkg/path/{name}.json",$myJson)
+    discard execCmd(fmt"setx {name} {windows_path}")
+    echo fmt"环境变量: {name} 已添加，请手动在用户环境变量的path加入%{name}%"
