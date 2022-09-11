@@ -1,4 +1,5 @@
 import system/io
+import osproc
 
 proc remove_all*(p_options:seq[string],workMode:string) = 
   if len(p_options) > 2:
@@ -7,9 +8,10 @@ proc remove_all*(p_options:seq[string],workMode:string) =
   var name = p_options[0]
   
   if workMode == "alternatives":
-    removeFile(fmt"etc/alternatives/{name}.exe")
-    removeFile(fmt"dpkg/alternatives/{name}.txt")
+    removeFile(absolutePath(fmt"etc/alternatives/{name}.exe", root=getEnv("PathTool")))
+    removeFile(absolutePath(fmt"dpkg/alternatives/{name}.txt", root=getEnv("PathTool")))
   
   if workMode == "path":
     removeFile(absolutePath(fmt"dpkg/path/{name}.json",getEnv("PathTool")))
-    delEnv(name)
+    discard execCmd(fmt"setx {name} empty")
+    echo fmt"user Env: {name} has been set to empty string!"

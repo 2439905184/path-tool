@@ -45,8 +45,8 @@ proc config_symlink*(p_options:seq[string]) =
     echo "错误，参数过多！"
   var name = p_options[0]
   var full_name = name & ".exe"
-  var configPath = fmt"dpkg/alternatives/{name}.txt"
-  var symlinkPath = "/etc/alternatives"
+  var configPath = absolutePath(fmt"dpkg/alternatives/{name}.txt",root=getEnv("PathTool"))
+  var symlinkPath = absolutePath(fmt"etc/alternatives/{name}.exe",root=getEnv("PathTool"))
   echo "--- you are change a command ---"
   echo "Selection  Path"
   var selections:seq[string] = @[]
@@ -62,8 +62,8 @@ proc config_symlink*(p_options:seq[string]) =
   var select_index = parseInt(param)
   var select = selections[select_index]
   echo "你选择了：" & select
-  removeFile("etc/alternatives/" & full_name)
+  removeFile(symlinkPath)
   var srcPath = select
-  var destPath = absolutePath(full_name,root=getCurrentDir() & symlinkPath)
-  createSymlink(srcPath, destPath)
-  echo "新的软链接已创建！"
+  #var destPath = symlinkPath
+  createSymlink(srcPath, symlinkPath)
+  echo fmt"新的软链接已创建！{symlinkPath}"

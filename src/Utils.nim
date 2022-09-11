@@ -25,3 +25,6 @@ proc add_new_line_when_old_file_do_not_include_new_value*(p_file:string, p_newli
   for vv in seqNew:
     f.write(vv & "\n")
   f.close()
+
+proc to_absolute*(p_file:string):string = 
+  return absolutePath(p_file,root=getEnv("PathTool"))
