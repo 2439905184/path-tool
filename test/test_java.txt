@@ -1,2 +1,7 @@
+path模式
 JAVA_11=D:\jdk\11\bin
 JAVA_8=E:\openjdk\8\bin
+
+软链接模式
+JAVA_11=D:\jdk\11\bin\java.exe
+JAVA_8=E:\openjdk\8\bin\java.exe
