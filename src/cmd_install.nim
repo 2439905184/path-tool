@@ -64,7 +64,7 @@ proc install_path*(p_options:seq[string]) =
         old_paths.add(path_json)
     writeFile(fmt"dpkg/path/{name}.json",$myJsonNode)
   else:
-    var myJson = %*{"env":"","path":[]}
+    var myJson = %*{"env":"","current":"","path":[]}
     myJson["env"] = newJString(name)
     myJson["path"].add(newJString(unix_path))
     writeFile(fmt"dpkg/path/{name}.json",$myJson)
