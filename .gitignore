@@ -1,4 +1,6 @@
 *.exe
+!test/hello/hello.exe
+!test/hello2/hello.exe
 dpkg/alternatives
 dpkg/path
 etc/
