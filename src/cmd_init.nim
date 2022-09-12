@@ -6,6 +6,7 @@ import osproc
 proc init_command*() = 
   var selfPath = getAppDir()
   createDir(absolutePath("dpkg/alternatives",root=selfPath))
+  createDir(absolutePath("dpkg/path",root=selfPath))
   createDir(absolutePath("etc/alternatives",root=selfPath))
   writeFile(absolutePath("etc/mode.txt",root=selfPath),"alternatives")
   var alternativePath = absolutePath("etc/alternatives",root=selfPath)
