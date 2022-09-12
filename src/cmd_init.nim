@@ -5,9 +5,9 @@ import osproc
 
 proc init_command*() = 
   var selfPath = getAppDir()
-  createDir("dpkg/alternatives")
-  createDir("etc/alternatives")
-  writeFile("etc/mode.txt","alternatives")
+  createDir(absolutePath("dpkg/alternatives",root=selfPath))
+  createDir(absolutePath("etc/alternatives",root=selfPath))
+  writeFile(absolutePath("etc/mode.txt",root=selfPath),"alternatives")
   var alternativePath = absolutePath("etc/alternatives",root=selfPath)
   discard execCmd(fmt"setx PathToolAlternative {alternativePath}")
   discard execCmd(fmt"setx PathTool {selfPath}")
