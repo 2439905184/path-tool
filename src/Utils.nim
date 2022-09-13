@@ -2,6 +2,10 @@ import os
 import std/strutils
 import std/sequtils
 
+
+proc to_absolute*(p_file:string):string = 
+  return absolutePath(p_file,root=getEnv("PathTool"))
+
 proc myToWindowsPath*(path: string): string = 
   return path.replace("/", "\\")
 
@@ -9,7 +13,7 @@ proc myToLinuxPath*(path: string): string =
   return path.replace("\\","/")
 
 proc getWorkMode*(): string = 
-  return readFile(absolutePath("etc/mode.txt",getEnv("PathTool")))
+  return readFile(to_absolute("etc/mode.txt"))
 
 # 此函数用于向txt添加新的行，仅当新的行的字符串和旧行字符串不重复时追加，覆盖旧文件
 proc add_new_line_when_old_file_do_not_include_new_value*(p_file:string, p_newline:string) = 
@@ -25,6 +29,3 @@ proc add_new_line_when_old_file_do_not_include_new_value*(p_file:string, p_newli
   for vv in seqNew:
     f.write(vv & "\n")
   f.close()
-
-proc to_absolute*(p_file:string):string = 
-  return absolutePath(p_file,root=getEnv("PathTool"))

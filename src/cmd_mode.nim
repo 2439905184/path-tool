@@ -1,4 +1,5 @@
 import os
+import Utils
 
 proc mode_command*(p_options:seq[string]) = 
   if len(p_options) > 1:
@@ -10,6 +11,5 @@ proc mode_command*(p_options:seq[string]) =
     return
   var mode = p_options[0]
   
-  var truePath = absolutePath("etc/mode.txt",root=getEnv("PathTool"))
-  #echo truePath
+  var truePath = to_absolute("etc/mode.txt")
   writeFile(truePath,mode)

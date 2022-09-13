@@ -8,7 +8,7 @@ var command_type:string
 var args:seq[string]
 var currentWorkMode:string = "alternatives"
 
-if fileExists(absolutePath("etc/mode.txt",root=getEnv("PathTool"))):
+if fileExists(to_absolute("etc/mode.txt")):
   currentWorkMode = getWorkMode()
 # 前向声明
 proc main(): void
