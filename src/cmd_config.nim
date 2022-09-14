@@ -34,7 +34,7 @@ proc config_path*(p_options:seq[string]) =
   var windows_path = myToWindowsPath(select)
   # 小问题，json文件的current key的值未修改 不过不影响环境变量的切换
   current_select = newJString(select)
-  var truePath = absolutePath(fmt"dpkg/path/{name}",root=getEnv("PathTool"))
+  var truePath = to_absolute(fmt"dpkg/path/{name}")
   writeFile(fmt"{truePath}.json",$myJsonNode)
   discard execCmd(fmt"setx {name} {windows_path}")
   
@@ -44,9 +44,8 @@ proc config_symlink*(p_options:seq[string]) =
   if len(p_options) > 1:
     echo "错误，参数过多！"
   var name = p_options[0]
-  var full_name = name & ".exe"
-  var configPath = absolutePath(fmt"dpkg/alternatives/{name}.txt",root=getEnv("PathTool"))
-  var symlinkPath = absolutePath(fmt"etc/alternatives/{name}.exe",root=getEnv("PathTool"))
+  var configPath = to_absolute(fmt"dpkg/alternatives/{name}.txt")
+  var symlinkPath = to_absolute(fmt"etc/alternatives/{name}.exe")
   echo "--- you are change a command ---"
   echo "Selection  Path"
   var selections:seq[string] = @[]

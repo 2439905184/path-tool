@@ -1,8 +1,5 @@
 import os
-import system/io
 import strformat
-import strutils
-import std/sequtils
 import std/json
 import Utils
 import osproc
@@ -34,14 +31,8 @@ proc install_symlink*(p_options:seq[string]) =
     echo fmt"软链接文件已添加: {destPath}" 
   else:
     echo fmt"软链接文件已存在，新路径: {srcPath} 已添加到组: {name}"
-    var pp = to_absolute(fmt"dpkg/alternatives/{name}.txt")
-    var old_lines:seq[string] = to_seq(lines(pp))
-    var new_lines:seq[string] = old_lines
-    #echo "--初始--"
-    #echo "旧行: " , old_lines
-    #echo "新行: " , new_lines
     var truePath = to_absolute(fmt"dpkg/alternatives/{name}.txt")
-    add_new_line_when_old_file_do_not_include_new_value(truePath,srcPath)
+    add_new_line_when_old_file_do_not_include_new_value(truePath,p_newline=srcPath)
 
 # 为名称为xxx的路径添加到json文件中 并创建名为xxx的环境变量
 proc install_path*(p_options:seq[string]) = 

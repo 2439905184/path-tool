@@ -1,7 +1,7 @@
 import os
 import script
 import Utils
-import WorkMode
+#import WorkMode
 
 var full_params:seq[string]
 var command_type:string
