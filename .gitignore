@@ -5,3 +5,4 @@ dpkg/
 etc/
 test.nim
 test.txt
+*.zip
